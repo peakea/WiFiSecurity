@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "target": "es6",
+    "outDir": "./dist"
+  },
+  "files": [
+    "code_gen.ts",
+    "test_server.ts"
+  ]
+}
