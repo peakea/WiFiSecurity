@@ -65,8 +65,8 @@ export class CodeGen {
         console.log('create qr code', name);
         QRCode.toFile(`./${name}.png`, secret, {
             color: {
-                dark: '#000',  // Blue dots
-                light: '#0000' // Transparent background
+                dark: '#000',
+                light: '#fff'
             }
         }, function (err) {
             if (err) throw err
@@ -91,10 +91,19 @@ export class CodeGen {
      */
     Generate() {
         console.log('generate');
-        const ssid = this.getOtp(this.ssidSecret, this.step, this.length, 'sha512');
-        const password = this.getOtp(this.passwordSecret, this.step, this.length, 'sha512');
-        console.log('SSID', ssid);
-        console.log('Password', password);
+        
+        const ssid = this.getOtp(this.ssidSecret, this.step, this.length, this.hashAlgorithm);
+        
+        const password = this.getOtp(this.passwordSecret, this.step, this.length, this.hashAlgorithm);
+        
+        const credentials = {
+            ssid: ssid,
+            password: password
+        };
+        
+        console.log('credentials', credentials);
+        
+        return credentials;
     }
 
     /**

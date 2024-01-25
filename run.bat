@@ -1,3 +1,3 @@
-npm install
-npx tsc
-node ./dist/test_server.js
+call npm install
+call npx tsc
+call node ./dist/test_server.js

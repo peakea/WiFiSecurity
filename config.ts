@@ -15,8 +15,8 @@ export const config = {
         length: 32,
         // step every 5 minutes
         // step: 300,
-        // step every 10 seconds for testing
-        step: 10,
+        // step every 0 seconds for testing
+        step: 20,
         hashAlgorithm: "sha512",
     },
 };
