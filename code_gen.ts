@@ -10,6 +10,7 @@ export class CodeGen {
         public ssidSecret: string = 'SSID',
         public passwordSecret: string = 'Password',
         public service: string = 'WiFi',
+        public issuer: string = 'WiFi Generator',
         public step: number = 300,
         public length: number = 10,
         public hashAlgorithm: string = 'sha512'
@@ -39,16 +40,16 @@ export class CodeGen {
      * @param {string} secret
      * @returns {string} otpauth
      */
-    generateSecret(user: string, service: string, secret: string) {
+    generateSecret(user: string, service: string, issuer:string, secret: string) {
         console.log('generate', user, service, secret);
 
-        const otpauth = `otpauth://totp/${user}@${service}?secret=${secret}&issuer=${service}`;
+        const otpauth = `otpauth://totp/${user}@${service}?secret=${secret}&issuer=${issuer}`;
 
         // Generate QR code as data URL
         QRCode.toDataURL(otpauth, {
             color: {
-                dark: '#000',  // Blue dots
-                light: '#0000' // Transparent background
+                dark: '#000',
+                light: '#fff'
             }
         }, function (err, url) {
             if (err) throw err;
@@ -79,8 +80,8 @@ export class CodeGen {
      * 
      */
     Setup() {
-        const ssidSecret = this.generateSecret('SSID', this.service, this.ssidSecret);
-        const passwordSecret = this.generateSecret('Password', this.service, this.passwordSecret);
+        const ssidSecret = this.generateSecret('SSID', this.service, this.issuer, this.ssidSecret);
+        const passwordSecret = this.generateSecret('Password', this.service, this.issuer, this.passwordSecret);
 
         this.createQrCode('SSID', ssidSecret);
         this.createQrCode('Password', passwordSecret);

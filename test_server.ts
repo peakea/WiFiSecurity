@@ -1,14 +1,23 @@
 import { CodeGen } from './code_gen';
-import { config } from './config';
 import { exec } from 'child_process';
 
 /**
  * A simple test server example
  */
+
+/**
+ * Configuration
+ */
+const config = require('./config.json');
+
+/**
+ * SSID/Password code generator
+ */
 const codeGen = new CodeGen(
     config.otp.ssidSecret,
     config.otp.passwordSecret,
     config.otp.service,
+    config.otp.issuer,
     config.otp.step,
     config.otp.length,
     config.otp.hashAlgorithm
